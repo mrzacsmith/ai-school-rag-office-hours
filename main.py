@@ -1,9 +1,16 @@
+import os
+from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain.prompts.prompt import PromptTemplate
 from langchain.chains.llm import LLMChain
 from langchain_pinecone import PineconeVectorStore
 from langchain_openai import OpenAIEmbeddings
 from constants import *
+
+load_dotenv()
+
+openai_key = os.getenv('OPENAI_API_KEY2')
+pinecone_key = os.getenv('PINECONE_API_KEY')
 
 # the prompt: we will be changing this soon
 prompt = "hello world!"
