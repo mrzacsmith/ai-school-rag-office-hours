@@ -1,2 +1,2 @@
-EMBEDDING_MODEL="text-embedding-3-small"
-PINECONE_INDEX="pineidx"
+EMBEDDING_MODEL="text-embedding-3-large"
+PINECONE_INDEX="officerag"
