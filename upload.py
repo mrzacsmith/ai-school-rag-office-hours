@@ -26,4 +26,4 @@ print(f"Adding {len(documents)} to Pinecone!")
 # Choose the embedding model and vector store 
 embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL)
 PineconeVectorStore.from_documents(documents=documents, embedding=embeddings, index_name=PINECONE_INDEX)
-print(f"len(documents) documents uploaded to Pinecone")
+print(f"{len(documents)} documents uploaded to Pinecone")
