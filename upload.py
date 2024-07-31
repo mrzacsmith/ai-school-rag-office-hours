@@ -13,7 +13,13 @@ openai_key = os.getenv('OPENAI_API_KEY2')
 pinecone_key = os.getenv('PINECONE_API_KEY')
 
 # Prep documents to be uploaded to the vector database (Pinecone)
+loader = DirectoryLoader('./', glob='**/*.pdf', loader_cls=PyPDFLoader)
+raw_docs = loader.load()
+# print(raw_docs)
+# print(len(raw_docs))
 
 # Split documents into smaller chunks
-
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+documents = text_splitter.split_documents(raw_docs)
+print(f"Adding {len(documents)} to Pinecone!")
 # Choose the embedding model and vector store 
