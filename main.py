@@ -28,5 +28,5 @@ prompt = "hello world!"
 # build a prompt template using the query and the context and build the prompt with context
 
 
-# Asking the LLM for a response from our prompt with the provided context using CatOpenAI and invoking it
+# Asking the LLM for a response from our prompt with the provided context using ChatOpenAI and invoking it
 # Then print the results content
