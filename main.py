@@ -16,8 +16,12 @@ pinecone_key = os.getenv('PINECONE_API_KEY')
 prompt = "hello world!"
 
 # Note: we must use the same embedding model that we used when uploading the docs
+embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL)
+document_vectorstore = PineconeVectorStore.from_documents(index_name=PINECONE_INDEX, embedding=embeddings)
+retriever =document_vectorstore.as_retriever()
 
-
+llm = ChatOpenAI(temperature=0.7)
+template = PromptTemplate(template="{query} Context: {context}", input_variables=["query", "context"])
 # Querying the vector database for "relevant" docs then create a retriever
 
 # create a context by using the retriever and getting the relevant docs based on the prompt
