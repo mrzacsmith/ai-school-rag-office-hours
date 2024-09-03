@@ -9,8 +9,8 @@ from constants import *
 
 load_dotenv()
 
-openai_key = os.getenv('OPENAI_API_KEY2')
-pinecone_key = os.getenv('PINECONE_API_KEY')
+openai_key = os.getenv("OPENAI_API_KEY")
+pinecone_key = os.getenv("PINECONE_API_KEY")
 
 # the prompt: we will be changing this soon
 
@@ -18,11 +18,15 @@ pinecone_key = os.getenv('PINECONE_API_KEY')
 embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL)
 
 # Querying the vector database for "relevant" docs then create a retriever
-document_vectorstore = PineconeVectorStore(index_name=PINECONE_INDEX, embedding=embeddings)
-retriever =document_vectorstore.as_retriever()
+document_vectorstore = PineconeVectorStore(
+    index_name=PINECONE_INDEX, embedding=embeddings
+)
+retriever = document_vectorstore.as_retriever()
 
 llm = ChatOpenAI(temperature=0.7, model_name="gpt-4o-mini")
-template = PromptTemplate(template="{query} Context: {context}", input_variables=["query", "context"])
+template = PromptTemplate(
+    template="{query} Context: {context}", input_variables=["query", "context"]
+)
 
 prompt = "Can you tell me about the best overall methods for day trading?"
 
@@ -32,9 +36,9 @@ context = retriever.get_relevant_documents(prompt)
 
 # show the thought process by looping over all relevant docs, showing the source and the content
 for doc in context:
-  print(f"Source: {doc.metadata}\nContext: {doc.page_content}\n\n")
-  print("******************************")
-  
+    print(f"Source: {doc.metadata}\nContext: {doc.page_content}\n\n")
+    print("******************************")
+
 # build a prompt template using the query and the context and build the prompt with context
 prompt_with_context = template.invoke({"query": prompt, "context": context})
 
